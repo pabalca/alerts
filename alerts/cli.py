@@ -1,6 +1,6 @@
 import sys
 import os
-from utils import load_config
+from alerts.utils import load_config
 import click
 import logging
 import json
