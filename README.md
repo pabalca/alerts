@@ -22,6 +22,7 @@ tg_chat_id:
 python3 -m virtualenv venv
 source venv/bin/activate
 pip install -e .
+```
 
 #### Example
 ```
