@@ -1,6 +1,9 @@
+import json
+import logging
 import os
 import sys
-import logging
+
+import requests
 from yaml import load
 
 try:
@@ -23,3 +26,15 @@ def load_config(ctx, param, value):
                 sys.exit()
         ctx.default_map = config
     return value
+
+
+def send_message(api, token, chat_id, message):
+    try:
+        r = requests.post(
+            api + token + "/sendMessage",
+            params={"chat_id": chat_id, "text": message},
+        )
+    except Exception as e:
+        logging.error(f"Exception {e}")
+        sys.exit()
+    return r.json()

@@ -1,11 +1,10 @@
-import sys
-import os
-from alerts.utils import load_config
-import click
-import json
-import requests
-import os
 import logging
+import os
+import sys
+
+import click
+
+from alerts.utils import load_config, send_message
 
 
 @click.command()
@@ -26,23 +25,8 @@ def cli(message, tg_api, tg_token, tg_chat_id):
     Send telegram message to chat <tg_chat_id> using the bot <tg_token>.
     """
 
-    # Check that configuration is valid.
-    if tg_api is None or tg_token is None or tg_chat_id is None:
-        logging.error("Configuration is not valid.")
-        sys.exit()
+    res = send_message(tg_api, tg_token, tg_chat_id, message)
 
-    # Send message.
-    try:
-        r = requests.post(
-            tg_api + tg_token + "/sendMessage",
-            params={"chat_id": tg_chat_id, "text": message},
-        )
-    except Exception as e:
-        logging.error(f"Exception {e}")
-        sys.exit()
-
-    # Check result.
-    res = r.json()
     if res["ok"]:
         logging.info(f"Alert {message} sent")
     else:
