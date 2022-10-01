@@ -2,14 +2,10 @@ import sys
 import os
 from alerts.utils import load_config
 import click
-import logging
 import json
 import requests
 import os
-
-logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
-)
+import logging
 
 
 @click.command()

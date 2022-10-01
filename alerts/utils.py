@@ -8,10 +8,6 @@ try:
 except ImportError:
     from yaml import Loader
 
-logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
-)
-
 
 def load_config(ctx, param, value):
     if os.path.exists(value):
